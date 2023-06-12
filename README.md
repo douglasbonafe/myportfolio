@@ -18,10 +18,6 @@ npm create astro@latest -- --template portfolio
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/portfolio/devcontainer.json)
 
 
-![portfolio](https://user-images.githubusercontent.com/30531913/233541731-f3dd38ba-2eef-4229-9878-54ec1c696d52.png)
-
-
-
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
