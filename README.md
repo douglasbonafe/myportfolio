@@ -5,7 +5,11 @@ It is not so complete yet, but I am updating it. And it will be continously upda
 I have created this site with Node.js, Astro and it is being deployed to Netlify.
 You can have a similar one for you, if you want...
 
-Please, visit my main page here on GITHUB for more information about Coding. I have different accounts in GitHub and Bitbucket. I am listing them in that README for your appreciation.
+## 🚀 About Me
+I'm a full-cycle developer with main focus on Quality Assurance and Automation...
+
+Please, visit my main page here on GitHub for more information about Coding. I have different accounts in GitHub and Bitbucket. I am listing them in that README for your appreciation.
+
 
 # How to create your own
 
@@ -16,6 +20,7 @@ npm create astro@latest -- --template portfolio
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/portfolio)
 [![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/portfolio)
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/portfolio/devcontainer.json)
+
 
 
 ## 🧞 Commands
