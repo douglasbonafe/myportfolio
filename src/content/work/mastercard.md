@@ -43,7 +43,7 @@ through a fork of OWASP-ZAP API.
 
 ### Used Technologies ###
 
-<a href="https://java.com" target="_blank" rel="noreferrer"><img src="./pictures/java.jpg" width="80" hight="80" alt="Java"/>
+<a href="https://java.com" target="_blank" rel="noreferrer"><img src="java.jpg" width="80" hight="80" alt="Java"/>
 <a href="https://spring.io/" target="_blank" rel="noreferrer"><img src="./pictures/spring.jpg" width="60" hight="60" alt="Spring"/>
 <a href="https://www.python.org/community/logos/" target="_blank" rel="noreferrer"><img src="./pictures/python.jpg" width="60" hight="60
 " alt="Python"/>
