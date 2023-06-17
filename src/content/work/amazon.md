@@ -17,7 +17,6 @@ tags:
 
 ### Used Technologies ###
 
-<a href="https://java.com/" target="_blank" rel="noreferrer"><img src="../../../public/a
-ssets/java.jpg" width="150" hight="150" alt="Java"/>
-<a href="https://aws.com/" target="_blank" rel="noreferrer"><img src="../../../public/assets/aws.jpg" width="150" hight="150" alt="AWS"/>
-<a href="https://appium.io/" target="_blank" rel="noreferrer"><img src="../../../public/assets/appium.jpg" width="150" hight="150" alt="Appium"/>
+<a href="https://java.com/" target="_blank" rel="noreferrer"><img src="./pictures/java.jpg" width="150" hight="150" alt="Java"/>
+<a href="https://aws.com/" target="_blank" rel="noreferrer"><img src="./pictures/aws.jpg" width="150" hight="150" alt="AWS"/>
+<a href="https://appium.io/" target="_blank" rel="noreferrer"><img src="./pictures/appium.jpg" width="150" hight="150" alt="Appium"/>

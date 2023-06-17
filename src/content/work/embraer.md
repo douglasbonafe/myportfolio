@@ -18,6 +18,6 @@ tags:
 
 ### Used Technologies ###
 
-<a href="https://playwright.dev/" target="_blank" rel="noreferrer"><img src="../../../public/assets/playwright.jpg" width="150" hight="150" alt="Playwright"/>
-<a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"><img src="../../../public/assets/typescript.jpg" width="80" hight="80" alt="Typescript"/>
-<a href="https://nodejs.dev/en/" target="_blank" rel="noreferrer"><img src="../../../public/assets/node.jpg" width="150" hight="150" alt="Node JS"/>
+<a href="https://playwright.dev/" target="_blank" rel="noreferrer"><img src="./pictures/playwright.jpg" width="150" hight="150" alt="Playwright"/>
+<a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"><img src="./pictures/typescript.jpg" width="80" hight="80" alt="Typescript"/>
+<a href="https://nodejs.dev/en/" target="_blank" rel="noreferrer"><img src="./pictures/node.jpg" width="150" hight="150" alt="Node JS"/>
