@@ -22,7 +22,4 @@ tags:
 - Defined metrics and SKUs for quality
 
 ### Used Technologies ###
-
-<a href="https://https://www.typescriptlang.org//" target="_blank" rel="noreferrer"><img src="./pictures/typescript.jpg" width="150" hight="150" alt="Typescript"/>
-<a href="https://aws.com/" target="_blank" rel="noreferrer"><img src="./pictures/aws.jpg" width="150" hight="150" alt="AWS"/>
-<a href="https://www.cypress.io/" target="_blank" rel="noreferrer"><img src="./pictures/cypress.jpg" width="150" hight="150" alt="Cypress"/>
+Typescript, Javascript, AWS, Cypress, Datadog, Datadog for Test Automation

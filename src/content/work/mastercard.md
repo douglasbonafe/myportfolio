@@ -42,17 +42,5 @@ through a fork of OWASP-ZAP API.
 - Assist Mastercard Customers directly
 
 ### Used Technologies ###
+Java, Spring, Python, Docker, Jenkins, Pivotal, Bitbucket, JBehave, OWASP ZAP, Microsoft Office, Angular, Rally
 
-<a href="https://java.com" target="_blank" rel="noreferrer"><img src="java.jpg" width="80" hight="80" alt="Java"/>
-<a href="https://spring.io/" target="_blank" rel="noreferrer"><img src="./pictures/spring.jpg" width="60" hight="60" alt="Spring"/>
-<a href="https://www.python.org/community/logos/" target="_blank" rel="noreferrer"><img src="./pictures/python.jpg" width="60" hight="60
-" alt="Python"/>
-<a href="https://www.docker.com/" target="_blank" rel="noreferrer"><img src="./pictures/docker.jpg" width="80" hight="80" alt="Docker"/>
-<a href="https://www.jenkins.io/" target="_blank" rel="noreferrer"><img src="./pictures/jenkins.jpg" width="100" hight="100" alt="Jenkins"/>
-<a href="https://www.vmware.com/company/pivotal-announcement.html" target="_blank" rel="noreferrer"><img src="./pictures/pivotal.jpg" width="80" hight="80" alt="Pivotal"/>
-<a href="https://bitbucket.org/" target="_blank" rel="noreferrer"><img src="./pictures/bitbucket.jpg" width="60" hight="60" alt="Java"/>
-<a href="https://jbehave.org/" target="_blank" rel="noreferrer"><img src="./pictures/jbehave.jpg" width="100" hight="100" alt="JBehave"/>
-<a href="https://www.zaproxy.org/" target="_blank" rel="noreferrer"><img src="./pictures/zap.jpg" width="80" hight="80" alt="OWASP ZAP"/>
-<a href="https://www.office.com/" target="_blank" rel="noreferrer"><img src="./pictures/office.jpg" width="80" hight="80" alt="Microsoft Office"/>
-<a href="https://angular.io/" target="_blank" rel="noreferrer"><img src="./pictures/angular.jpg" width="60" hight="60" alt="Angular"/>
-<a href="https://www.broadcom.com/products/software/value-stream-management/rally" target="_blank" rel="noreferrer"><img src="./pictures/rally.jpg" width="80" hight="80" alt="Rally (Agile Central)"/>
