@@ -1,41 +1,34 @@
-# Douglas Bonafé: Portfolio
+# Douglas Bonafé: Blog
 
-This is my web portfolio for your appreciation. Here you can see the main things I am doing in the last years.
-It is not so complete yet, but I am updating it. And it will be continously updated.
-I have created this site with Node.js, Astro and it is being deployed to Netlify.
-You can have a similar one for you, if you want...
+Notes on QA, test automation and AI engineering. Each post comes with code you can run.
 
-## 🚀 About Me
-I'm a full-cycle developer with main focus on Quality Assurance and Automation...
+Live at https://douglasbonafe.github.io/myportfolio/
 
-Please, visit my main page here on GitHub for more information about Coding. I have different accounts in GitHub and Bitbucket. I am listing them in that README for your appreciation.
+## Writing a post
 
+Add a Markdown file to `src/content/blog/`:
 
-# How to create your own
-
+```yaml
+---
+title: "Post title"
+description: "One or two sentences for the list page and link previews."
+publishDate: 2026-11-03
+tags: [QA, Python]
+repo: https://github.com/douglasbonafe/some-poc   # optional
+cover: /assets/blog/some-cover.jpg                # optional, lives in public/
+cover_alt: "What the cover shows"
+---
 ```
-npm create astro@latest -- --template portfolio
-```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/portfolio)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/portfolio)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/portfolio/devcontainer.json)
+Push to `master` and the GitHub Pages workflow builds and deploys it.
 
+## Commands
 
+| Command           | Action                                  |
+| :---------------- | :-------------------------------------- |
+| `npm install`     | Install dependencies                    |
+| `npm run dev`     | Dev server at `localhost:3000`          |
+| `npm run build`   | Build to `./dist/`                      |
+| `npm run preview` | Preview the build locally               |
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                | Action                                           |
-| :--------------------- | :----------------------------------------------- |
-| `npm install`          | Installs dependencies                            |
-| `npm run dev`          | Starts local dev server at `localhost:3000`      |
-| `npm run build`        | Build your production site to `./dist/`          |
-| `npm run preview`      | Preview your build locally, before deploying     |
-| `npm run astro ...`    | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+The site is built with Astro. GitHub Pages serves it under `/myportfolio/`, so the deploy sets `BASE_PATH` and runs `scripts/rebase-paths.mjs` after the build. Local and root-domain builds need neither.
