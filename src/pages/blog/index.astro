@@ -1,0 +1,110 @@
+---
+import { getCollection } from 'astro:content';
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContactCTA from '../../components/ContactCTA.astro';
+import Hero from '../../components/Hero.astro';
+import Pill from '../../components/Pill.astro';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+);
+
+const fmt = (d: Date) =>
+	d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
+---
+
+<BaseLayout title="Blog | Douglas Bonafé" description="Notes on QA, test automation and AI engineering, each one backed by working code.">
+	<div class="stack gap-20">
+		<main class="wrapper stack gap-8">
+			<Hero
+				title="Blog"
+				tagline="Notes on QA, test automation and AI engineering. Each post comes with code you can run."
+				align="start"
+			/>
+			<ul class="posts">
+				{
+					posts.map((post) => (
+						<li>
+							<a class="post" href={`/blog/${post.slug}/`}>
+								<time datetime={post.data.publishDate.toISOString()}>{fmt(post.data.publishDate)}</time>
+								<span class="title">{post.data.title}</span>
+								<span class="description">{post.data.description}</span>
+								<span class="tags">{post.data.tags.map((t) => <Pill>{t}</Pill>)}</span>
+							</a>
+						</li>
+					))
+				}
+			</ul>
+			<p class="older">
+				Older notes live on
+				<a href="https://painted-caribou-530.notion.site/IT-Blog-EN-2be843059b2d4e53ac3713cca77f86b6?pvs=4">Notion</a>.
+			</p>
+		</main>
+		<ContactCTA />
+	</div>
+</BaseLayout>
+
+<style>
+	.posts {
+		list-style: none;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+
+	.post {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		padding: 1.75rem;
+		border: 1px solid var(--gray-800);
+		border-radius: 1rem;
+		background: var(--gradient-subtle);
+		box-shadow: var(--shadow-sm);
+		text-decoration: none;
+		color: inherit;
+		transition: box-shadow var(--theme-transition), border-color var(--theme-transition);
+	}
+
+	.post:hover,
+	.post:focus {
+		box-shadow: var(--shadow-md);
+		border-color: var(--accent-regular);
+	}
+
+	time {
+		font-size: var(--text-sm);
+		color: var(--gray-300);
+	}
+
+	.title {
+		font-family: var(--font-brand);
+		font-size: var(--text-xl);
+		font-weight: 600;
+		color: var(--gray-0);
+		line-height: 1.2;
+	}
+
+	.description {
+		color: var(--gray-200);
+		max-width: 65ch;
+	}
+
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.older {
+		color: var(--gray-300);
+	}
+
+	@media (min-width: 50em) {
+		.title {
+			font-size: var(--text-2xl);
+		}
+	}
+</style>

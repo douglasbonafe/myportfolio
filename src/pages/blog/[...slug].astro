@@ -1,0 +1,190 @@
+---
+import { CollectionEntry, getCollection } from 'astro:content';
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContactCTA from '../../components/ContactCTA.astro';
+import Hero from '../../components/Hero.astro';
+import Icon from '../../components/Icon.astro';
+import Pill from '../../components/Pill.astro';
+
+interface Props {
+	entry: CollectionEntry<'blog'>;
+}
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	return posts.map((entry) => ({ params: { slug: entry.slug }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const date = entry.data.publishDate.toLocaleDateString('en-US', {
+	year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC',
+});
+---
+
+<BaseLayout title={`${entry.data.title} | Douglas Bonafé`} description={entry.data.description}>
+	<div class="stack gap-20">
+		<div class="stack gap-15">
+			<header>
+				<div class="wrapper stack gap-2">
+					<a class="back-link" href="/blog/"><Icon icon="arrow-left" /> Blog</a>
+					<Hero title={entry.data.title} align="start">
+						<div class="details">
+							<p class="meta">
+								<time datetime={entry.data.publishDate.toISOString()}>{date}</time>
+								{entry.data.repo && (
+									<>
+										<span aria-hidden="true">·</span>
+										<a href={entry.data.repo}><Icon icon="github-logo" /> Source code</a>
+									</>
+								)}
+							</p>
+							<div class="tags">{entry.data.tags.map((t) => <Pill>{t}</Pill>)}</div>
+							<p class="description">{entry.data.description}</p>
+						</div>
+					</Hero>
+				</div>
+			</header>
+			<main class="wrapper">
+				<article class="content">
+					{entry.data.cover && <img class="cover" src={entry.data.cover} alt={entry.data.cover_alt || ''} />}
+					<Content />
+				</article>
+			</main>
+		</div>
+		<ContactCTA />
+	</div>
+</BaseLayout>
+
+<style>
+	header {
+		padding-bottom: 2.5rem;
+		border-bottom: 1px solid var(--gray-800);
+	}
+
+	.back-link {
+		display: none;
+	}
+
+	.details {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		padding: 0.5rem;
+	}
+
+	.meta {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.75rem;
+		color: var(--gray-300);
+	}
+
+	.meta a {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		color: var(--accent-text-over, var(--accent-regular));
+	}
+
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.description {
+		font-size: var(--text-lg);
+		max-width: 60ch;
+	}
+
+	.content {
+		max-width: 70ch;
+		margin-inline: auto;
+		line-height: 1.7;
+	}
+
+	.content > :global(* + *) {
+		margin-top: 1.1rem;
+	}
+
+	.content :global(h2) {
+		margin-top: 2.75rem;
+		font-size: var(--text-2xl);
+	}
+
+	.content :global(h3) {
+		margin-top: 2rem;
+		font-size: var(--text-xl);
+	}
+
+	.content :global(ul),
+	.content :global(ol) {
+		padding-inline-start: 1.5rem;
+	}
+
+	.content :global(li + li) {
+		margin-top: 0.4rem;
+	}
+
+	.content :global(img) {
+		border-radius: 1rem;
+		border: 1px solid var(--gray-800);
+		box-shadow: var(--shadow-sm);
+	}
+
+	.cover {
+		width: 100%;
+		margin-bottom: 1rem;
+	}
+
+	.content :global(pre) {
+		padding: 1rem 1.25rem;
+		border-radius: 0.75rem;
+		overflow-x: auto;
+		font-size: 0.85rem;
+		line-height: 1.5;
+		border: 1px solid var(--gray-800);
+	}
+
+	.content :global(:not(pre) > code) {
+		font-size: 0.9em;
+		padding: 0.1em 0.35em;
+		border-radius: 0.3em;
+		background: var(--gray-900);
+	}
+
+	.content :global(table) {
+		display: block;
+		overflow-x: auto;
+		border-collapse: collapse;
+		width: 100%;
+		font-size: var(--text-sm);
+	}
+
+	.content :global(th),
+	.content :global(td) {
+		padding: 0.6rem 0.8rem;
+		border-bottom: 1px solid var(--gray-800);
+		text-align: left;
+		vertical-align: top;
+	}
+
+	.content :global(th) {
+		color: var(--gray-0);
+	}
+
+	.content :global(a) {
+		text-decoration: underline;
+		text-underline-offset: 0.2em;
+	}
+
+	@media (min-width: 50em) {
+		.back-link {
+			display: block;
+			align-self: flex-start;
+		}
+	}
+</style>
