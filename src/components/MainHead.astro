@@ -4,11 +4,13 @@ import '../styles/global.css';
 interface Props {
 	title?: string | undefined;
 	description?: string | undefined;
+	alternates?: { lang: string; href: string }[];
 }
 
 const {
 	title = 'Douglas S. Bonafé | Blog',
 	description = 'Notes on QA, test automation and AI engineering by Douglas Bonafé.',
+	alternates = [],
 } = Astro.props;
 ---
 
@@ -17,6 +19,7 @@ const {
 <meta name="viewport" content="width=device-width" />
 <meta name="generator" content={Astro.generator} />
 <title>{title}</title>
+{alternates.map((a) => <link rel="alternate" hreflang={a.lang} href={a.href} />)}
 
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />

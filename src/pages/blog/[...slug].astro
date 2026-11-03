@@ -6,6 +6,7 @@ import ContactCTA from '../../components/ContactCTA.astro';
 import Hero from '../../components/Hero.astro';
 import Icon from '../../components/Icon.astro';
 import Pill from '../../components/Pill.astro';
+import { formatDate, postUrl, translations, ui } from '../../i18n';
 
 interface Props {
 	entry: CollectionEntry<'blog'>;
@@ -18,17 +19,24 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
-const date = entry.data.publishDate.toLocaleDateString('en-US', {
-	year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC',
-});
+const lang = entry.data.lang;
+const t = ui[lang];
+const date = formatDate(entry.data.publishDate, lang);
+const versions = translations(await getCollection('blog'), entry);
+const absolute = (path: string) =>
+	new URL(import.meta.env.BASE_URL.replace(/\/$/, '') + path, Astro.site ?? Astro.url).href;
+const alternates = [
+	...versions.map((v) => ({ lang: v.data.lang, href: absolute(postUrl(v)) })),
+	...versions.filter((v) => v.data.lang === 'en').map((v) => ({ lang: 'x-default', href: absolute(postUrl(v)) })),
+];
 ---
 
-<BaseLayout title={`${entry.data.title} | Douglas Bonafé`} description={entry.data.description}>
+<BaseLayout title={`${entry.data.title} | Douglas Bonafé`} description={entry.data.description} lang={lang} alternates={alternates}>
 	<div class="stack gap-20">
 		<div class="stack gap-15">
 			<header>
 				<div class="wrapper stack gap-2">
-					<a class="back-link" href="/blog/"><Icon icon="arrow-left" /> Blog</a>
+					<a class="back-link" href="/blog/"><Icon icon="arrow-left" /> {t.back}</a>
 					<Hero title={entry.data.title} align="start">
 						<div class="details">
 							<p class="meta">
@@ -36,11 +44,23 @@ const date = entry.data.publishDate.toLocaleDateString('en-US', {
 								{entry.data.repo && (
 									<>
 										<span aria-hidden="true">·</span>
-										<a href={entry.data.repo}><Icon icon="github-logo" /> Source code</a>
+										<a href={entry.data.repo}><Icon icon="github-logo" /> {t.source}</a>
 									</>
 								)}
 							</p>
-							<div class="tags">{entry.data.tags.map((t) => <Pill>{t}</Pill>)}</div>
+							{versions.length > 1 && (
+								<nav class="langs" aria-label={t.readIn}>
+									<span>{t.readIn}</span>
+									{versions.map((v) =>
+										v.data.lang === lang ? (
+											<span class="lang current" aria-current="page" lang={v.data.lang}>{ui[v.data.lang].name}</span>
+										) : (
+											<a class="lang" href={postUrl(v)} hreflang={v.data.lang} lang={v.data.lang}>{ui[v.data.lang].name}</a>
+										)
+									)}
+								</nav>
+							)}
+							<div class="tags">{entry.data.tags.map((tag) => <Pill>{tag}</Pill>)}</div>
 							<p class="description">{entry.data.description}</p>
 						</div>
 					</Hero>
@@ -87,6 +107,35 @@ const date = entry.data.publishDate.toLocaleDateString('en-US', {
 		align-items: center;
 		gap: 0.4rem;
 		color: var(--accent-text-over, var(--accent-regular));
+	}
+
+	.langs {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: var(--text-sm);
+		color: var(--gray-300);
+	}
+
+	.lang {
+		padding: 0.25rem 0.75rem;
+		border-radius: 999rem;
+		border: 1px solid var(--gray-800);
+		text-decoration: none;
+		color: var(--gray-200);
+	}
+
+	a.lang:hover,
+	a.lang:focus {
+		border-color: var(--accent-regular);
+		color: var(--gray-0);
+	}
+
+	.lang.current {
+		background: var(--accent-regular);
+		border-color: var(--accent-regular);
+		color: var(--accent-text-over);
 	}
 
 	.tags {

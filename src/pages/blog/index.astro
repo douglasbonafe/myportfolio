@@ -5,13 +5,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ContactCTA from '../../components/ContactCTA.astro';
 import Hero from '../../components/Hero.astro';
 import Pill from '../../components/Pill.astro';
+import { formatDate, postUrl, translations, ui } from '../../i18n';
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
-);
-
-const fmt = (d: Date) =>
-	d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
+const all = await getCollection('blog');
+// One card per post, in English; translations show up as links on the card.
+const posts = all
+	.filter((p) => p.data.lang === 'en')
+	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+	.map((post) => ({ post, others: translations(all, post).filter((v) => v.data.lang !== 'en') }));
 ---
 
 <BaseLayout title="Blog | Douglas Bonafé" description="Notes on QA, test automation and AI engineering, each one backed by working code.">
@@ -24,14 +25,25 @@ const fmt = (d: Date) =>
 			/>
 			<ul class="posts">
 				{
-					posts.map((post) => (
-						<li>
-							<a class="post" href={`/blog/${post.slug}/`}>
-								<time datetime={post.data.publishDate.toISOString()}>{fmt(post.data.publishDate)}</time>
+					posts.map(({ post, others }) => (
+						<li class="post">
+							<a class="main" href={postUrl(post)}>
+								<time datetime={post.data.publishDate.toISOString()}>{formatDate(post.data.publishDate, 'en', 'short')}</time>
 								<span class="title">{post.data.title}</span>
 								<span class="description">{post.data.description}</span>
 								<span class="tags">{post.data.tags.map((t) => <Pill>{t}</Pill>)}</span>
 							</a>
+							{others.length > 0 && (
+								<p class="also">
+									Also in{' '}
+									{others.map((v, i) => (
+										<>
+											{i > 0 && ' · '}
+											<a href={postUrl(v)} hreflang={v.data.lang} lang={v.data.lang}>{ui[v.data.lang].name}</a>
+										</>
+									))}
+								</p>
+							)}
 						</li>
 					))
 				}
@@ -55,23 +67,37 @@ const fmt = (d: Date) =>
 	}
 
 	.post {
-		display: flex;
-		flex-direction: column;
-		gap: 0.75rem;
 		padding: 1.75rem;
 		border: 1px solid var(--gray-800);
 		border-radius: 1rem;
 		background: var(--gradient-subtle);
 		box-shadow: var(--shadow-sm);
-		text-decoration: none;
-		color: inherit;
 		transition: box-shadow var(--theme-transition), border-color var(--theme-transition);
 	}
 
 	.post:hover,
-	.post:focus {
+	.post:focus-within {
 		box-shadow: var(--shadow-md);
 		border-color: var(--accent-regular);
+	}
+
+	.main {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		text-decoration: none;
+		color: inherit;
+	}
+
+	.also {
+		margin-top: 1rem;
+		font-size: var(--text-sm);
+		color: var(--gray-300);
+	}
+
+	.also a {
+		color: var(--gray-100);
+		text-underline-offset: 0.2em;
 	}
 
 	time {

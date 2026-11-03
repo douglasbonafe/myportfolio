@@ -2,6 +2,8 @@
 title: "Predictive QA: Using Machine Learning to Anticipate Bugs Before Deploy"
 description: "I built a just-in-time defect predictor, trained it on requests and Flask, and evaluated it the way it would actually be used. It works. Just not the way the sales decks say."
 publishDate: 2026-11-03
+lang: en
+key: predictive-qa
 tags:
   - QA
   - Machine Learning

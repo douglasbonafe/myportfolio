@@ -5,6 +5,9 @@ export const collections = {
 		schema: z.object({
 			title: z.string(),
 			description: z.string(),
+			lang: z.enum(['en', 'pt', 'es']).default('en'),
+			// Shared by every translation of the same post.
+			key: z.string().optional(),
 			publishDate: z.coerce.date(),
 			tags: z.array(z.string()),
 			repo: z.string().url().optional(),
